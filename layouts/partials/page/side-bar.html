@@ -1,10 +1,27 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-primary">NEW</span></a>
-            </li>
-        </ul>
+        {{- if .Site.Menus.main }}
+            <ul class="nav">
+                <li >
+                    <a class="nav-link" href="/">
+                        <i class="icon-home"></i>Home</a>
+                </li>
+                {{- $currentNode := . }}
+                {{- range sort .Site.Menus.main }}
+                    {{- if .Name}}
+                        <li >
+                            <a class="nav-link" href="{{ .URL }}">
+                                <i class="icon-puzzle"></i>
+                                {{ .Name }}</a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+            </ul>
+        {{- end }}
+
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>
 </div>
+
+
+

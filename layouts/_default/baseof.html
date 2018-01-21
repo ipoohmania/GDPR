@@ -8,15 +8,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  {{ partial "page/head.html" }}
+  {{ partial "page/head.html" . }}
 
-  <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden sidebar-mobile-show">
 
-    {{ partial "page/header.html" }}
+    {{ partial "page/header.html" . }}
 
     <div class="app-body">
 
-      {{ partial "page/side-bar.html" }}
+      {{ partial "page/side-bar.html" . }}
 
       <main class="main">
         <div class="container-fluid">
@@ -27,8 +27,8 @@
       </main>
     </div>
 
-    {{ partial "page/footer.html"  }}
-    {{ partial "page/scripts.html" }}
+    {{ partial "page/footer.html"  . }}
+    {{ partial "page/scripts.html" .    }}
 
   </body>
 </html>

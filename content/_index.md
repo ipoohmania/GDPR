@@ -1,5 +1,5 @@
 ---
-title: first page
+title: Home
 ---
 
-this is the first page
+Welcome to this site

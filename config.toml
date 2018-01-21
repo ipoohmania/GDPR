@@ -1,0 +1,4 @@
+baseurl          = "/"
+[Params]
+    ghrepo          = "https://github.com/project-cx/hugo-projects"
+    title           = "Projects (Hugo based)"

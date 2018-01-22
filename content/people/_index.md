@@ -1,5 +1,5 @@
 ---
-title : People at a Glance
+title : People (Table)
 menu  : main
 ---
 

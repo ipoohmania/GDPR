@@ -1,0 +1,19 @@
+[
+  [ "Wages"    , "SOC"   , 20 ],
+  [ "Wages"    , "AppSec", 10 ],
+  [ "Wages"    , "SecOps",  5 ],
+  [ "Wages"    , "Ops"   , 25 ],
+  [ "Wages"    , "Risk"  , 15 ],
+
+  [ "Services" , "SOC"   , 40 ],
+  [ "Services" , "AppSec", 30 ],
+  [ "Services" , "SecOps",  5 ],
+  [ "Services" , "Ops"   ,  5 ],
+  [ "Services" , "Risk"  ,  5 ],
+
+
+  [ "SIEM"     , "SOC"   , 20 ],
+  [ "PCI"      , "AppSec", 30 ],
+  [ "SDL"      , "SecOps",  5 ],
+  [ "DDoS"     , "SOC"   , 25 ]
+]

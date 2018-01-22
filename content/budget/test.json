@@ -15,5 +15,9 @@
   [ "SIEM"     , "SOC"   , 20 ],
   [ "PCI"      , "AppSec", 30 ],
   [ "SDL"      , "SecOps",  5 ],
-  [ "DDoS"     , "SOC"   , 25 ]
+  [ "DDoS"     , "SOC"   , 25 ],
+
+  [ "Ops"     , "Project A"   , 25 ],
+  [ "SOC"     , "Project A"   , 25 ],
+  [ "SOC"     , "Project B"   , 25 ]
 ]

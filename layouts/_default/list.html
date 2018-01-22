@@ -3,6 +3,8 @@
     <h1>{{ .Params.title }}</h1>
     {{ .Content }}
 
-    <h2>list of pages will go here</h2>
+    {{ range .Data.Pages}}
+        <li><a href="{{ .Permalink }}"> {{ .Params.title }} </a> </li>
+    {{ end}}
 
 {{ end }}

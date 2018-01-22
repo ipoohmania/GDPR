@@ -1,0 +1,29 @@
+
+{{ $areas := where .Site.Pages "Type" "area" }}
+
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th><i class="icon-organization"></i></th>
+            <th><i class="icon-chart"></i></th>
+            <th><i class="icon-people"></i></th>
+            <th><i class="icon-book-open"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range $areas }}
+            <tr>
+                <th>{{ .Params.title }}</th>
+                <td>{{ .Params.budget }}</td>
+                <td>{{ .Params.head_count }}</td>
+                <td>
+                    {{ with . }}
+                        {{ partial "table/projects" .Data.Pages }}
+                    {{ end }}
+
+                </td>
+            </tr>
+        {{ end }}
+    </tbody>
+</table>

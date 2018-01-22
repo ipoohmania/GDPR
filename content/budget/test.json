@@ -4,6 +4,7 @@
   [ "Wages"    , "SecOps",  5 ],
   [ "Wages"    , "Ops"   , 25 ],
   [ "Wages"    , "Risk"  , 15 ],
+  [ "Wages"    , "AAAAAAA"  , 55 ],
 
   [ "Services" , "SOC"   , 40 ],
   [ "Services" , "AppSec", 30 ],

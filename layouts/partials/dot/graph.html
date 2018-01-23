@@ -1,0 +1,42 @@
+digraph G {
+    {{- if $.inner }}
+        {{ $.inner }}
+    {{- end}}
+    {{- range .pages -}}
+        {{- $value_1 := (index .Params $.var_1) -}}
+        {{- $value_2 := (index .Params $.var_2) -}}
+        {{- $label   := (index .Params $.label) -}}
+        {{ if  (and $value_1 $value_2) }}
+
+            {{- $page := .Params -}}
+            {{- range $.styles -}}                                          <!-- add styles -->
+                {{- $key    := index . "key"            }}
+                {{- $query  := index . "query"          }}
+                {{- $params := index . "params"         }}
+                {{- if  eq (index $page $key) $query    }}
+                    "{{ index $page "title" }}" [{{$params}}]
+                {{- end -}}
+            {{- end }}
+            {{- if eq (printf "%T" $value_1) "[]string" }}                       <!-- if it is an array on value_1 -->
+                {{- range $value_1 }}
+                    "{{ . }}" -> "{{ $value_2 }}" [ label="{{$label}}" ];
+                {{- end }}
+            {{- else if eq (printf "%T" $value_2) "[]string"}}                   <!-- if it is an array on value_1 -->
+                {{- range $value_2 }}
+                    "{{ $value_1 }}" -> "{{ . }}" [ label="{{$label}}" ];
+                {{- end }}
+            {{- else}}                                                           <!-- if it is an string -->
+                "{{ $value_1 }}" -> "{{ $value_2 }}" [ label="{{$label}}" ];
+
+            {{- end }}
+
+            {{- if eq $value_1 .Params.Title }}
+                 "{{ .Params.Title }}" [ URL="{{ .Permalink }}" ];
+            {{- end }}
+            {{- if eq $value_2 .Params.Title }}
+                "{{ .Params.Title }}" [ URL="{{ .Permalink }}" ];
+            {{- end }}
+        {{- end -}}
+    {{- end }}
+
+}

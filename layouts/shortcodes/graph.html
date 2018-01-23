@@ -1,0 +1,52 @@
+{{ $styles      := index .Page.Params "styles"   }}          <!-- get this value from the .md page -->
+{{ $area        := index .Params "area"          }}          <!-- refactor in to array -->
+{{ $type        := index .Params "type"          }}
+{{ $pillar      := index .Params "pillar"        }}
+{{ $applied_to  := index .Params "applied_to"    }}
+{{ $var_1       := .Params.var_1                 }}
+{{ $var_2       := .Params.var_2                 }}
+{{ $label       := default "" .Params.label      }}
+{{ $width       := default "100%" .Params.width  }}
+{{ $inner       := .Inner                        }}
+
+{{ $.Scratch.Set "pages" .Site.Pages }}                                    <!-- .Scratch.pages = .Site.Pages -->
+{{ if ne $area ""   }}
+    {{ $pages := $.Scratch.Get "pages" }}
+    {{ $.Scratch.Set "pages" (where $pages ".Params.area" $area)   }}       <!-- .Scratch.pages = where .Site.Pages["area"] == .Params.area -->
+{{ end }}
+{{ if ne $type ""   }}
+    {{ $pages := $.Scratch.Get "pages" }}
+    {{ $.Scratch.Set "pages" (where $pages ".Params.type"  $type)     }}       <!-- .Scratch.pages = where .Site.Pages["Type"] == .Params.type -->
+{{ end }}
+{{ if ne $pillar "" }}
+    {{ $pages := $.Scratch.Get "pages" }}
+    {{ $.Scratch.Set "pages" (where $pages ".Params.pillar" $pillar) }}       <!-- .Scratch.pages = where .Site.Pages["Type"] == .Params.type -->
+{{ end }}
+{{ if ne $applied_to "" }}    
+    {{ $pages := $.Scratch.Get "pages" }}
+    {{ $.Scratch.Set "pages" (where $pages ".Params.applied_to" $applied_to) }}       <!-- .Scratch.pages = where .Site.Pages["Type"] == .Params.type -->
+{{ end }}
+
+{{ $pages := $.Scratch.Get "pages"      }}
+
+{{ if eq (len $pages) 0 }}
+    <pre> Empty graph (no pages on query) </pre>
+{{ else }}
+
+    {{ $key   := (delimit (slice $type $area $var_1 $var_2 ) "_") }}
+    {{ $key   := add $key (delimit ((seq 1 50)  | shuffle | first 1)  "")  }}           <!-- add random value so that similar svgs can be shown in page -->
+
+    {{ $dot   := (partial "dot/graph.html"  (dict "styles" $styles "pages" $pages "inner" $inner "var_1" $var_1 "var_2" $var_2 "label" $label)) }}
+
+    {{ partial "graph/viz-js.html" (dict "key" $key "dot" $dot "width" $width) }}
+
+
+    {{ if eq (index .Params "debug") "show-dot"  }}
+
+        <h3>Dot code</h3>
+        <textarea rows="12">
+            {{ $dot }}
+        </textarea>
+    {{ end }}
+
+{{ end }}

@@ -1,0 +1,28 @@
+table will be here:
+
+{{ $fields := (slice "title" "type" "status") }}
+{{ $rows   := where .Site.Pages ".Params.area" "senior" }}
+
+<table>
+    <thead>
+        {{ range $fields}}
+            <th>{{ . }}</th>
+        {{ end }}
+    </thead>
+    <tbody>
+        {{ range $rows }}
+            {{ $row := .}}
+            <tr>
+                {{ range $fields}}
+                    <td>{{ index $row.Params . }}</td>
+                {{ end }}
+                <td>
+                </td>
+            </tr>
+        {{ end }}
+    </tbody>
+</table>
+
+{{ range $rows }}
+    -- {{.}} <br>
+{{ end }}

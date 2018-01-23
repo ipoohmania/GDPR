@@ -1,0 +1,40 @@
+<script src="/js/graph/jquery.min.js"> </script>
+<script src="/js/graph/viz-latest.js"       ></script>
+
+<style>
+    #{{.key}}_data {
+        display: none;
+    }
+    .dot-graph {
+        text-align: center;
+    }
+    #{{.key}} img {
+        width         : {{.width}} !important;
+        vertical-align: top;
+    }
+
+    /*was not working*/
+    /*#{{.key}} svg {*/
+        /*width         : {{.width}} !important;*/
+        /*vertical-align: top;*/
+    /*}*/
+</style>
+
+<textarea id="{{.key}}_data">{{ .dot }}</textarea>
+<div class="dot-graph">
+    <div id="{{.key}}"></div>
+</div>
+
+<script type="text/javascript">
+    var target = jQuery('#{{.key}}');               // get target div
+    var data   = jQuery('#{{.key}}_data').val();    // get dot data
+    var svg    = Viz(data, { format: "svg" } );     // Generate the visualization of the Graph into "svg".
+    // todo: add option to select which mode to use (img vs svg)
+    //var img    = Viz.svgXmlToPngImageElement(svg)   // convert to image
+    //target.html(img);                               // add to page
+    target.html(svg)
+
+    $("svg").append("<style>svg a { cursor: pointer; }</style>")
+    $("svg").width("{{.width}}")
+</script>
+

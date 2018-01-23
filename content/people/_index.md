@@ -5,5 +5,4 @@ menu  : main
 
 This is the people's table:
 
-{{< people-table >}}
 

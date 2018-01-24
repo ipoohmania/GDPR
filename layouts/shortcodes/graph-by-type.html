@@ -1,0 +1,33 @@
+<br/>
+<h4>graph: <!--{{ .Params.type }} by -->'{{ .Params.var_1 }}' to '{{ .Params.var_2 }}'</h4>
+<!--<h3>Graph</h3>-->
+
+{{ $type  := index .Params "type"  }}
+{{ $area  := index .Params "area"  }}
+{{ $label := default "" .Params.label  }}
+
+{{ if $type }}
+    {{ $.Scratch.Set "pages" (where .Site.Pages "Type" $type) }}
+{{ else if $area }}
+    {{ $.Scratch.Set "pages" (where .Site.Pages ".Params.area" $area) }}
+{{ else }}
+    {{ $.Scratch.Set "pages" .Site.Pages }}
+{{ end }}
+
+{{ $pages := $.Scratch.Get "pages" }}
+{{ $var_1 := .Params.var_1 }}
+{{ $var_2 := .Params.var_2 }}
+{{ $key   := (delimit (slice $type $area $var_1 $var_2 ) "_") }}
+{{ $dot   := (partial "dot/graph.html"  (dict "pages" $pages "area" $area "var_1" $var_1 "var_2" $var_2 "label" $label)) }}
+
+{{ partial "graph/viz-js.html" (dict "key" $key "dot" $dot) }}
+
+{{ if eq (index .Params "debug") "show-dot"  }}
+
+    <h5>Here is the Dot code for the graph above</h5>
+    <textarea rows="12">
+{{ $dot }}
+    </textarea>
+{{ end }}
+
+<br/>

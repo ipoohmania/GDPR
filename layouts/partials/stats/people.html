@@ -1,0 +1,24 @@
+{{/* In here we attach different stats and calculation to different page/object's .Scratch to be used later on a page which needs them. */}}
+{{ .Scratch.Set "total_head_count" 0 }}
+{{ .Scratch.Set "total_budget" 0 }}
+{{ range where .Site.Pages "Type" "area" }}
+    {{/* Sum of budgets is obtained by adding respective area's budgets  */}}
+    {{ $.Scratch.Set "total_budget" (add .Params.budget ($.Scratch.Get "total_budget")) }}
+	
+	{{/* Sum of head_count for each area is obtained by adding respective projects's budget  */}}
+	{{ $areaScratch := .Scratch }}
+	{{ $areaScratch.Set "project_head_count" 0 }}
+	{{/* the projects = .Data.Pages */}}
+	{{ range .Data.Pages }}
+		{{/* While we are looping on the projects, we sum their head_count to create the total head_count */}}
+		{{ $.Scratch.Set "total_head_count" (add .Params.head_count ($.Scratch.Get "total_head_count") ) }}
+
+		{{/* Same as above but per area. We attach the sum to the area's .Scratch for future use */}}
+	    {{ $areaScratch.Set "project_head_count" (add (int .Params.head_count) (int ($areaScratch.Get "project_head_count")) ) }}
+	{{ end }}
+{{ end }}
+{{/* Formating and attaching total_ value to the "people" page's .Scratch */}}
+{{ $sum_head_count := lang.NumFmt 0 (.Scratch.Get "total_head_count") }}
+{{ $sum_budget := lang.NumFmt 0 (.Scratch.Get "total_budget") }}
+{{ .Scratch.Set "sum_head_count" $sum_head_count }}
+{{ .Scratch.Set "sum_budget" $sum_budget }}

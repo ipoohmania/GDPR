@@ -1,7 +1,7 @@
 ---
 title     : Area 1
 type      : area
-budget    : 1.2M
+budget    : 1200000
 head_count: 18
 ---
 

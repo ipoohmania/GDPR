@@ -1,0 +1,28 @@
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <div style="display:grid;grid-template-columns:repeat(4, 1fr);grid-gap:15px;">
+		{{ range where (where .Site.Pages "Type" "candidate") "Kind" "page" }}
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">{{ .Title }}</h4>
+					{{ with .Params.company }}
+					<h6 class="card-subtitle mb-2 text-muted">{{ . }}</h6>
+					{{ end }}
+					<p class="card-text">
+						{{ $params_to_list := (dict "Status" "status" "Area" "area" "Last job" "last_job" "Loc" "location") }}
+						{{ $candidate := .  }}
+						{{ range $index, $value :=  $params_to_list }}
+							{{ with $candidate.Param $value }}
+								<strong>{{ $index }}: </strong>{{ . }} <br>
+							{{ end }}
+						{{ end }}
+					</p>
+					{{ with .Params.trello_link }}
+					<a href="{{ . }}" target="_blank" class="card-link">Trello</a>
+					{{ end }}
+					<a href="{{ .Permalink }}" class="card-link">Go</a>
+				</div>
+			</div>
+		{{ end }}
+	</div>
+{{ end }}

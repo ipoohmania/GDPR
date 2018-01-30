@@ -12,7 +12,7 @@
 				<tr><th>trello_link </th> <td><a href="{{.Params.trello_link}}" target="_blank">Trello</a> 	</td></tr>
 				<tr><th>last-job 	</th> <td>{{index .Params ".last-job" }} 	</td></tr>
 				<tr><th>location 	</th> <td>{{.Params.location}} 				</td></tr>
-				<tr><th>jobs 		</th> <td>{{.Params.jobs}} 					</td></tr>
+				<tr><th>jobs 		</th> <td>{{delimit .Params.jobs ", "}} 					</td></tr>
 				<tr><th>keywords 	</th> <td>{{.Params.keywords}} 				</td></tr>
 			</table>
 	</main>

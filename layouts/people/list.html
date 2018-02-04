@@ -13,9 +13,9 @@
 
 {{ range $areas }}
 <div class="card">
-    <div class="card-block" style="padding-bottom:0;">
+    <div class="card-block">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-md-2">
                 <div class="d-sm-flex" style="height:100%;align-items: center;justify-content: center;">
                     <div>
                         <h4>{{ .Params.title }}</h4>
@@ -24,10 +24,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-10">
-                <div class="row">
+            <div class="col-md-10">
+                <div class="grid">
                     {{ range .Data.Pages }}
-                        <div class="col-sm-3">
+                        <div class="grid__item">
                             {{ partial "project/card" . }}
                         </div>
                     {{ end }}

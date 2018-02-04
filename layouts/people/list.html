@@ -1,40 +1,67 @@
 {{ define "content" }}
 
-{{ $areas := where .Site.Pages "Type" "area" }}
+    <style>
+        .container-fluid {
+            background-image : url(/img/people/slide-background.png) !important;
+            background-color : white;
+        }
+        .title {
+            padding-top: 50px;
+        }
+        .card {
+            border        : 1px dashed;
+            border-radius : 2em;
+        }
+        .card .bg-primary {
+            background-color : white !important;
+            color            : black !important;;
+        }
+        .area img {
+            width: 150px;
+        }
+        .parent-block {
+            margin-left    : 20px;
+            padding-left  : 20px;
+        }
 
-{{ partial "stats/people.html" . }}
+    </style>
 
-<div class="text-center">
-    <h1>{{ .Title }}</h1>
-    <p class="lead">
-        {{ .Scratch.Get "sum_head_count" }} people for a total group for £ {{ .Scratch.Get "sum_budget" }}
-    </p>
-</div>
+    {{ $areas := where .Site.Pages "Type" "area" }}
 
-{{ range $areas }}
-<div class="card">
-    <div class="card-block" style="padding-bottom:0;">
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="d-sm-flex" style="height:100%;align-items: center;justify-content: center;">
-                    <div>
-                        <h4>{{ .Params.title }}</h4>
-                        <span class="btn btn-outline-primary">£ {{ lang.NumFmt 0 .Params.budget }}</span>
-                        <span class="btn btn-outline-primary"><i class="fa fa-male"></i> {{ .Scratch.Get "project_head_count" }}</span>
+    {{ partial "stats/people.html" . }}
+
+    <div class="text-center">
+        <h1 class="title">{{ .Title }}</h1>
+        <p class="lead">
+            {{ .Scratch.Get "sum_head_count" }} people for a total group for £ {{ .Scratch.Get "sum_budget" }}
+        </p>
+    </div>
+
+    {{ range $areas }}
+    <div class="card parent-block">
+        <div class="card-block" style="padding-bottom:0;">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="d-sm-flex" style="height:100%;align-items: center;justify-content: center;">
+                        <div class="area">
+                            <img src="{{ .Params.logo }}"/>
+                            <h4>{{ .Params.title }}</h4>
+                            <span class="btn btn-outline-primary">£ {{ lang.NumFmt 0 .Params.budget }}</span>
+                            <span class="btn btn-outline-primary"><i class="fa fa-male"></i> {{ .Scratch.Get "project_head_count" }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-10">
-                <div class="row">
-                    {{ range .Data.Pages }}
-                        <div class="col-sm-3">
-                            {{ partial "project/card" . }}
-                        </div>
-                    {{ end }}
+                <div class="col-sm-10">
+                    <div class="row">
+                        {{ range .Data.Pages }}
+                            <div class="col-sm-3">
+                                {{ partial "project/card" . }}
+                            </div>
+                        {{ end }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{{ end }}
+    {{ end }}
 {{ end }}

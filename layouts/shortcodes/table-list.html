@@ -16,21 +16,33 @@
 {{      .Scratch.Set "rows" (.Scratch.Get "pages")                     }}
 {{  end                                                                }}
 
+{{/* todo: add ability to sort by field (or at least by title) */}}
 
 <div class="card">
     <div class="card-body">
         <table class="table" style="background:white;">
             <thead>
+                <th width="10">#</th>
                 {{ range $fields}}
                     <th>{{ . }}</th>
                 {{ end }}
             </thead>
             <tbody>
-                {{ range .Scratch.Get "rows" }}
-                    {{ $row := . }}
+                {{ range $index, $row :=  .Scratch.Get "rows" }}
                     <tr>
+                        <td> {{ add $index 1}}</td>
                         {{ range $fields}}
-                            <td>{{ index $row.Params (lower .) }}</td>
+                            {{ if isset $row.Params (lower .)               }}
+                                {{ $link := $row.Permalink                  }}
+                                {{ $text := (index $row.Params (lower .))   }}
+                                {{ if eq . "title" }}
+                                    <td>
+                                        <a href="{{$link}}">{{ $text }}</a>
+                                    </td>
+                                {{ else }}
+                                    <td>{{ $text }}</td>
+                                {{ end }}
+                            {{ end}}
                         {{ end }}
                     </tr>
                 {{ end }}

@@ -1,11 +1,21 @@
-{{ $fields := (slice "Title" "Type" "Status") }}
 
-{{ $candidates := where .Site.Pages "Type" (default $.Site.Params.candidateType "Candidate") }}
-{{ if eq (.Get "status") "any" }}
-    {{ .Scratch.Set "rows" $candidates }}
-{{ else }}
-    {{ .Scratch.Set "rows" (where $candidates ".Params.status" (.Get "status")) }}
-{{ end }}
+{{  $type   := .Get "type"                                             }}
+{{  $when   := (add ".Params." (.Get "when"))                          }}
+{{  $is     := .Get "is"                                               }}
+{{  $fields := split (.Get "fields") ","                               }}  {{/* $fields := split (default (.Get "fields") "title") ","   */}}  {{/* bug: default value not working (idea is to default to title when no value is provided) */}}
+
+{{  if ne $type ""                                                     }}
+{{      .Scratch.Set "pages" (where .Site.Pages "Type" $type)          }}
+{{  else                                                               }}
+{{      .Scratch.Set "pages" .Site.Pages                               }}
+{{  end                                                                }}
+
+{{  if ne $is ""                                                       }}
+{{      .Scratch.Set "rows" (where (.Scratch.Get "pages") $when $is)   }}
+{{  else                                                               }}
+{{      .Scratch.Set "rows" (.Scratch.Get "pages")                     }}
+{{  end                                                                }}
+
 
 <div class="card">
     <div class="card-body">

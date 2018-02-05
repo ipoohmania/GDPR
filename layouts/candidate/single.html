@@ -1,6 +1,6 @@
 {{ define "content" }}
 
-	{{ partial "widgets/breadcrumb.html" . }}
+	{{/* partial "widgets/breadcrumb.html" . */}}
 	<main>
 		<h1>Candidate: {{ .Params.title}}</h1>
 			{{ .Content }}
@@ -9,7 +9,10 @@
 			<table>
 				<tr><th>title  		</th> <td>{{.Params.title}} 				</td></tr>
 				<tr><th>company 	</th> <td>{{.Params.company}} 				</td></tr>
-				<tr><th>trello_link </th> <td><a href="{{.Params.trello_link}}" target="_blank">Trello</a> 	</td></tr>
+				<tr><th>trello      </th> <td><a href="{{.Params.trello_link}}" target="_blank">open</a> 	</td></tr>
+				{{ if isset .Params "cv" }}
+					<tr><th>cv 			</th> <td><a href="../{{index .Params "cv"}}" target="_blank">view</a></td></tr>
+				{{ end }}
 				<tr><th>last-job 	</th> <td>{{index .Params ".last-job" }} 	</td></tr>
 				<tr><th>location 	</th> <td>{{.Params.location}} 				</td></tr>
 				<tr><th>jobs 		</th> <td>{{.Params.jobs}} 					</td></tr>

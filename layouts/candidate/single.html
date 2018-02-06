@@ -20,8 +20,28 @@
                 <tr><th>cv review 	</th> <td>{{.Params.cv_review}} 		    </td></tr>
                 <tr><th>status   	</th> <td>{{.Params.status   }} 		    </td></tr>
                 <tr><th>email    	</th> <td>{{.Params.email    }} 		    </td></tr>
-                <tr><th>activity    </th> <td>{{.Params.activity }} 		    </td></tr>
 			</table>
+
+        <hr/>
+        <h3>activity</h3>
+        {{ $text := .Params.activity }}
+        {{ if eq (printf "%T" $text) "map[interface {}]interface {}" }}
+        <td>
+            <table class="table table-responsive-sm table-striped">
+                {{ range $key, $value := $text }}
+                <tr>
+                    <th>{{ $key }}</th>
+                    <td> {{$value}} </td>
+                </tr>
+                {{ end }}
+            </table>
+        </td>
+        {{ else }}
+        <td>{{ $text }}</td>
+        {{ end }}
+
 	</main>
+    <hr/>
+    <a href="/candidates">Back to all Candidates page</a>
 	{{ partial "widgets/edit-link.html" . }}
 {{ end }}

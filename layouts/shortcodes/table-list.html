@@ -40,7 +40,20 @@
                                         <a href="{{$link}}">{{ $text }}</a>
                                     </td>
                                 {{ else }}
-                                    <td>{{ $text }}</td>
+                                    {{ if eq (printf "%T" $text) "map[interface {}]interface {}" }}
+                                        <td>
+                                            <table class="table table-responsive-sm table-striped">
+                                                {{ range $key, $value := $text }}
+                                                    <tr>
+                                                        <th>{{ $key }}</th>
+                                                        <td> {{$value}} </td>
+                                                    </tr>
+                                                {{ end }}
+                                            </table>
+                                        </td>
+                                    {{ else }}
+                                        <td>{{ $text }}</td>
+                                    {{ end }}
                                 {{ end }}
                             {{ end}}
                         {{ end }}

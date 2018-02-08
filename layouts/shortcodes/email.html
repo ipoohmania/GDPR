@@ -1,0 +1,14 @@
+
+
+<div class="card">
+    <div class="card-header">
+        {{ .Params.title }}
+        <div class="card-actions">
+            <a href="#" class="btn-minimize" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true"><i class="icon-arrow-up"></i></a>
+            <a href="#" class="btn-close"><i class="icon-close"></i></a>
+        </div>
+    </div>
+    <div class="card-body collapse show" id="collapseExample">
+        {{ markdownify .Inner }}
+    </div>
+</div>

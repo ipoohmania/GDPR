@@ -1,0 +1,29 @@
+<style>
+    #{{.key}} { width: {{.width}}; height: 500px }
+</style>
+<script src="/js/graph/vis.js"></script>
+<div class="container">
+    <h2>{{ .Params.Title }} </h2>
+    <div id="{{.key}}"></div>
+    <script type="text/javascript">
+
+        var options;
+
+        options = {
+            physics: {
+                repulsion: {
+                    centralGravity: 2.1,
+                    springLength: 250,
+                    nodeDistance: 250,
+                    springConstant: 0.05,
+                    damping: 0.09
+                }
+            }}
+
+        var container = document.getElementById('{{.key}}');
+        var dot = '{{ .dot }}'
+        var data = vis.network.convertDot(dot);
+        var network = new vis.Network(container, data, options);
+    </script>
+
+</div>

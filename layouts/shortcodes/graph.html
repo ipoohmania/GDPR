@@ -38,13 +38,17 @@
 
     {{ $dot   := (partial "dot/graph.html"  (dict "styles" $styles "pages" $pages "inner" $inner "var_1" $var_1 "var_2" $var_2 "label" $label)) }}
 
-    {{ partial "graph/viz-js.html" (dict "key" $key "dot" $dot "width" $width) }}
+    {{ if eq $.Page.Params.engine "vis-js" }}
+        {{ partial "graph/vis-js.html" (dict "key" $key "dot" $dot "width" $width) }}
 
+    {{ else }}
+        {{ partial "graph/viz-js.html" (dict "key" $key "dot" $dot "width" $width) }}
+    {{ end }}
 
     {{ if eq (index .Params "debug") "show-dot"  }}
 
         <h3>Dot code</h3>
-        <textarea rows="12">
+        <textarea style="width:100%;height:600px ">
             {{ $dot }}
         </textarea>
     {{ end }}

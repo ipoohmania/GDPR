@@ -1,29 +1,79 @@
 {{ define "content" }}
 
 	{{/* partial "widgets/breadcrumb.html" . */}}
-	<main>
-		<h1>Candidate: {{ .Params.title}}</h1>
-			{{ .Content }}
+	<main class="candidate">
+		<h1>
+            {{ if isset .Params "image"}}
+                <div class="avatar avatar-lg">
+                    <img class="img-avatar" src="{{.Params.image}}" />
+                </div>
+            {{ end }}
+            Candidate: {{ .Params.title}}
 
-			<!-- candidate table -->
-			<table>
-				<tr><th>title  		</th> <td>{{.Params.title}} 				</td></tr>
-				<tr><th>company 	</th> <td>{{.Params.company}} 				</td></tr>
-				<tr><th>trello      </th> <td><a href="{{.Params.trello_link}}" target="_blank">open</a> 	</td></tr>
-				{{ if isset .Params "cv" }}
-					<tr><th>cv 			</th> <td><a href="../{{index .Params "cv"}}" target="_blank">view</a></td></tr>
-				{{ end }}
-				<tr><th>last-job 	</th> <td>{{index .Params ".last-job" }} 	</td></tr>
-				<tr><th>location 	</th> <td>{{.Params.location}} 				</td></tr>
-				<tr><th>jobs 		</th> <td>{{.Params.jobs}} 					</td></tr>
-				<tr><th>keywords 	</th> <td>{{.Params.keywords}} 				</td></tr>
-                <tr><th>cv review 	</th> <td>{{.Params.cv_review}} 		    </td></tr>
-                <tr><th>status   	</th> <td>{{.Params.status   }} 		    </td></tr>
-                <tr><th>email    	</th> <td>{{.Params.email    }} 		    </td></tr>
-			</table>
+            <a class="btn-sm" href="{{.Site.Params.ghrepo}}edit/master/content/{{.File.Path}}" target="_blank">
+                <i class="fa fa-edit"></i> Edit Candidate (in GitHub)
+            </a>
+        </h1>
+
+        <!-- candidate table -->
+
+        <table class="table table-striped">
+            <thead>
+                <th>title  		 </th>
+                <th>company  	 </th>
+                <th>current_role </th>
+            </thead>
+            <tr>
+                <td>{{.Params.title}} 				</td>
+                <td>{{.Params.company}} 			</td>
+                <td>{{.Params.current_role}} 		</td>
+            </tr>
+
+            <thead>
+            <th>linkedIn    </th>
+            <th>trelo  		</th>
+            <th>cv  		</th>
+            </thead>
+            <tr>
+                <td>
+                    {{ if .Params.linkedin }}
+                    <a href="{{.Params.linkedin}}" target="_blank">open</a>
+                    {{ end }}
+                </td>
+                <td>{{ if .Params.trello_link }}
+                    <a href="{{.Params.trello_link}}" target="_blank">open</a>
+                    {{ end }}
+                </td>
+                <td>
+                    {{ if isset .Params "cv" }}
+                    <a href="../{{index .Params "cv"}}" target="_blank">view</a></td></tr>
+            {{ end }}
+            </td>
+            </tr>
+            <thead>
+                <th>location  	</th>
+                <th>jobs  		</th>
+                <th>keywords    </th>
+            </thead>
+            <tr>
+                <td>{{.Params.location}}  	    </td>
+                <td>{{.Params.jobs}}  			</td>
+                <td>{{.Params.keywords}} 		</td>
+            </tr>
+            <thead>
+                <th>cv review  	</th>
+                <th>status  	</th>
+                <th>email  		</th>
+            </thead>
+            <tr>
+                <td>{{.Params.cv_review }} 				</td>
+                <td>{{.Params.status}}  			</td>
+                <td>{{.Params.email}}  			</td>
+            </tr>
+        </table>
 
         <hr/>
-        <h3>activity</h3>
+        <h3>Activity</h3>
         {{ $text := .Params.activity }}
         {{ if eq (printf "%T" $text) "map[interface {}]interface {}" }}
         <td>
@@ -40,8 +90,8 @@
         <td>{{ $text }}</td>
         {{ end }}
 
+        {{ .Content }}
 	</main>
     <hr/>
     <a href="/candidates">Back to all Candidates page</a>
-	{{ partial "widgets/edit-link.html" . }}
 {{ end }}

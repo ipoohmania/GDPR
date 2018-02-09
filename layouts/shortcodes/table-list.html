@@ -1,7 +1,13 @@
 
 {{  $type   := cond (ne (.Get "type") "") (.Get "type") "candidate"         }}
 {{  $when   := cond (ne (.Get "when") "") (add ".Params." (.Get "when")) "" }}
-{{  $is     := .Get "is"                                                    }}
+{{ .Scratch.Set "is" (.Get "is")}}
+{{ if eq (.Scratch.Get "is") "false" }}
+{{      .Scratch.Set "is" nil }}
+{{ else }}
+{{      .Scratch.Set "is" (.Get "is") }}
+{{ end }}
+{{ $is := .Scratch.Get "is" }}
 {{  $fields := split (.Get "fields") ","                                    }}  {{/* $fields := split (default (.Get "fields") "title") ","   */}}  {{/* bug: default value not working (idea is to default to title when no value is provided) */}}
 
 {{  if ne $type ""                                                          }}

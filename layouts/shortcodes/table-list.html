@@ -1,13 +1,13 @@
 
-{{  $type   := .Get "type"                                                  }}
-{{  $when   := (add ".Params." (.Get "when"))                               }}
+{{  $type   := cond (ne (.Get "type") "") (.Get "type") "candidate"         }}
+{{  $when   := cond (ne (.Get "when") "") (add ".Params." (.Get "when")) "" }}
 {{  $is     := .Get "is"                                                    }}
 {{  $fields := split (.Get "fields") ","                                    }}  {{/* $fields := split (default (.Get "fields") "title") ","   */}}  {{/* bug: default value not working (idea is to default to title when no value is provided) */}}
 
 {{  if ne $type ""                                                          }}
-{{      .Scratch.Set "pages" (where .Site.Pages "Type" $type)               }}
+{{      .Scratch.Set "pages" (where (where .Site.Pages "Type" $type) "Kind" "page") }}
 {{  else                                                                    }}
-{{      .Scratch.Set "pages" .Site.Pages                                    }}
+{{      .Scratch.Set "pages" (where .Site.Pages "Kind" "page" )              }}
 {{  end                                                                     }}
 
 {{  if ne $when ""                                                          }}

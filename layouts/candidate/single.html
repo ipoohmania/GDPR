@@ -37,18 +37,18 @@
             <tr>
                 <td>
                     {{ if .Params.linkedin }}
-                    <a href="{{.Params.linkedin}}" target="_blank">open</a>
+                        <a href="{{.Params.linkedin}}" target="_blank">open</a>
                     {{ end }}
                 </td>
                 <td>{{ if .Params.trello_link }}
-                    <a href="{{.Params.trello_link}}" target="_blank">open</a>
+                        <a href="{{.Params.trello_link}}" target="_blank">open</a>
                     {{ end }}
                 </td>
                 <td>
                     {{ if isset .Params "cv" }}
-                    <a href="../{{index .Params "cv"}}" target="_blank">view</a></td></tr>
-            {{ end }}
-            </td>
+                        <a href="../{{index .Params "cv"}}" target="_blank">view</a></td></tr>
+                    {{ end }}
+                </td>
             </tr>
             <thead>
                 <th>location  	</th>
@@ -66,9 +66,9 @@
                 <th>email  		</th>
             </thead>
             <tr>
-                <td>{{.Params.cv_review }} 				</td>
-                <td>{{.Params.status}}  			</td>
-                <td>{{.Params.email}}  			</td>
+                <td>{{.Params.cv_review }} 		    </td>
+                <td><a href="/tables/{{.Params.status}}"> {{.Params.status}} </a></td>
+                <td>{{.Params.email}}  			    </td>
             </tr>
         </table>
 

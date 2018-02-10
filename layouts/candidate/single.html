@@ -75,6 +75,11 @@
             <tr>
                 <td>{{.Params.cv_review }} 		    </td>
                 <td><a href="/tables/{{.Params.status}}"> {{.Params.status}} </a></td>
+                <td>
+                    {{ if .Params.in_workable }}
+                        <div class="badge badge-pill badge-info">in Workable</div>
+                    {{ end }}
+                </td>
             </tr>
         </table>
 

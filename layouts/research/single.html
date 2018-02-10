@@ -8,10 +8,10 @@
                     <img class="img-avatar" src="{{.Params.image}}" />
                 </div>
             {{ end }}
-            Candidate: {{ .Params.title}}
+            Research: {{ .Params.title}}
 
             <a class="btn-sm" href="{{.Site.Params.ghrepo}}edit/master/content/{{.File.Path}}" target="_blank">
-                <i class="fa fa-edit"></i> Edit Candidate (in GitHub)
+                <i class="fa fa-edit"></i> Edit (in GitHub)
             </a>
         </h1>
 
@@ -20,21 +20,8 @@
         <table class="table table-striped">
             <tr>
                 <td>
-                    {{ if isset .Params "cv" }}
-                    <a href="../{{index .Params "cv"}}" target="_blank">cv</a>
-                    {{ end }}
-                </td>
-                <td>
                     {{ if .Params.linkedin }}
                     <a href="{{.Params.linkedin}}" target="_blank">linkedin</a>
-                    {{ end }}
-                </td>
-                <td>{{ if .Params.workable }}
-                    <a href="{{.Params.workable}}" target="_blank">workable</a>
-                    {{ end }}
-                </td>
-                <td>{{ if .Params.trello_link }}
-                    <a href="{{.Params.trello_link}}" target="_blank">trello</a>
                     {{ end }}
                 </td>
             </tr>
@@ -48,13 +35,6 @@
             <tr>
                 <th>current_role </th>
                 <td>{{.Params.current_role}} 		</td>
-                <th>applied_to:   </th>
-                <td>
-                    <div class="badge badge-pill badge-info">
-                    {{ .Params.applied_to}}</div>
-                </td>
-                <th>source </th>
-                <td>{{.Params.source}} 		</td>
             </tr>
             <tr>
                 <th>locations  	            </th>
@@ -69,15 +49,8 @@
                 <td>{{.Params.email}}       </td>
             </tr>
             <tr>
-                <th>cv review:  	        </th>
-                <td>{{.Params.cv_review }} 	</td>
                 <th>status:  	            </th>
                 <td><a href="/tables/{{.Params.status}}"> {{.Params.status}} </a></td>
-                <td>
-                    {{ if .Params.in_workable }}
-                        <div class="badge badge-pill badge-info">in Workable</div>
-                    {{ end }}
-                </td>
             </tr>
 
         </table>
@@ -103,5 +76,5 @@
         {{ .Content }}
 	</main>
     <hr/>
-    <a href="/candidates">Back to all Candidates page</a>
+    <a href="/tables/research-candidates/">Back to table with all Research Candidates</a>
 {{ end }}

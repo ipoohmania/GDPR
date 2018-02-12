@@ -7,13 +7,19 @@
 {{ else }}
 {{      .Scratch.Set "is" (.Get "is") }}
 {{ end }}
+{{/* By default, table-list will only retrieve pages which are note archived */}}
+{{ .Scratch.Set "default_collection" (where (where .Site.Pages "Kind" "page") ".Params.archive" nil) }}
+{{/* If .Get "when" is equalt to archive we let when/is logic take care of filtering */}}
+{{ if eq (.Get "when") "archive" }}
+    {{ .Scratch.Set "default_collection" (where .Site.Pages "Kind" "page") }}
+{{ end }}
 {{ $is := .Scratch.Get "is" }}
 {{  $fields := split (.Get "fields") ","                                    }}  {{/* $fields := split (default (.Get "fields") "title") ","   */}}  {{/* bug: default value not working (idea is to default to title when no value is provided) */}}
 
 {{  if ne $type ""                                                          }}
-{{      .Scratch.Set "pages" (where (where .Site.Pages "Type" $type) "Kind" "page") }}
+{{      .Scratch.Set "pages" (where (.Scratch.Get "default_collection") "Type" $type) }}
 {{  else                                                                    }}
-{{      .Scratch.Set "pages" (where .Site.Pages "Kind" "page" )              }}
+{{      .Scratch.Set "pages" (.Scratch.Get "default_collection") }}
 {{  end                                                                     }}
 
 {{  if ne $when ""                                                          }}
@@ -56,9 +62,11 @@
                                 </td>
                                 {{ else if eq . "image" }}
                                     <td>
+                                        {{ with $text }}
                                         <div class="avatar avatar-sm">
-                                            <img class="img-avatar" src="{{ $text }}" />
+                                            <img class="img-avatar" src="{{ . }}" />
                                         </div>
+                                        {{ end }}
                                     </td>
                                 {{ else }}
                                     {{ if eq (printf "%T" $text) "map[interface {}]interface {}" }}

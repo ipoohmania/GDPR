@@ -8,8 +8,19 @@
                 </li>
                 {{- $currentNode := . }}
                 {{- range sort .Site.Menus.main }}
-                    {{- if .Name}}
-                        <li >
+                    {{- if .HasChildren }}
+                        <li class="nav-title">
+                                {{ .Name }}
+                        </li>
+                        {{ range .Children }}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ .URL }}">
+                                    <i class="icon-puzzle"></i>
+                                    {{ .Name }}</a>
+                            </li>
+                        {{ end }}
+                    {{- else  }}
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ .URL }}">
                                 <i class="icon-puzzle"></i>
                                 {{ .Name }}</a>

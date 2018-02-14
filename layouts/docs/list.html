@@ -1,0 +1,35 @@
+{{ define "content" }}
+
+    <h1>{{ .Params.title }}</h1>
+    {{ .Content }}
+	
+    {{ $docs := readDir "content/docs" }}
+	{{ $.Scratch.Set "docs_index" 0 }}
+	{{ range $docs }}
+		{{ $subdir := (printf "/content/docs/%s" .Name) }}
+		{{ $subpath := (printf "/docs/%s" .Name) }}
+		{{ $id := printf "collapse-%d" ($.Scratch.Get "docs_index") }}
+		{{ if (and .IsDir (gt .Size 64)) }}
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">
+						<a data-toggle="collapse" href="#{{ $id }}">{{ .Name }} | {{ .Size }}</a>
+					</h5>
+				</div>
+				<div id="{{ $id }}" class="collapse {{ if eq ($.Scratch.Get "docs_index") 0 }}show{{ end}}">
+					<div class="card-body">
+						<ul style="margin-bottom:0">
+						{{ range (readDir $subdir) }}
+							{{ if not .IsDir }}
+								<li><a target="_blank" href="{{ $subpath }}{{ .Name | relURL }}" target="_blank"> {{ .Name }}</a></li>
+							{{ end }}
+						{{ end }}
+						</ul>
+					</div>
+				</div>
+			</div>
+			{{ $.Scratch.Add "docs_index" 1 }}
+		{{ end }}
+	{{ end }}
+{{ end }}
+

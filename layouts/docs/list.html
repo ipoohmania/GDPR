@@ -13,7 +13,7 @@
 			<div class="card">
 				<div class="card-header">
 					<h5 class="mb-0">
-						<a data-toggle="collapse" href="#{{ $id }}">{{ .Name }} | {{ .Size }}</a>
+						<a data-toggle="collapse" href="#{{ $id }}">{{ .Name }}</a>
 					</h5>
 				</div>
 				<div id="{{ $id }}" class="collapse {{ if eq ($.Scratch.Get "docs_index") 0 }}show{{ end}}">

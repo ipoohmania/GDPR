@@ -9,7 +9,7 @@
                 {{- $currentNode := . }}
                 {{- range sort .Site.Menus.main }}
                     {{- if .HasChildren }}
-                        <li class="nav-item nav-dropdown">
+                        <li class="nav-item nav-dropdown open">
                             <a href="{{ with .URL }}{{ . }}{{ else }}#{{ end }}" class="nav-link nav-dropdown-toggle">{{ with .Pre }}{{ . }}{{ end }}{{ .Name }}</a>
                             <ul class="nav-dropdown-items">    
                                 {{ range .Children }}

@@ -8,11 +8,21 @@
                 </li>
                 {{- $currentNode := . }}
                 {{- range sort .Site.Menus.main }}
-                    {{- if .Name}}
-                        <li >
+                    {{- if .HasChildren }}
+                        <li class="nav-item nav-dropdown">
+                            <a href="{{ with .URL }}{{ . }}{{ else }}#{{ end }}" class="nav-link nav-dropdown-toggle">{{ with .Pre }}{{ . }}{{ end }}{{ .Name }}</a>
+                            <ul class="nav-dropdown-items">    
+                                {{ range .Children }}
+                                    <li class="nav-item">
+                                        <a class="nav-link" style="padding-left:2em" href="{{ .URL }}">{{ with .Pre }}{{ . }}{{ end }}{{ .Name }}</a>
+                                    </li>
+                                {{ end }}
+                            </ul>
+                        </li>
+                    {{- else  }}
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ .URL }}">
-                                <i class="icon-puzzle"></i>
-                                {{ .Name }}</a>
+                                {{ with .Pre }}{{ . }}{{ end }}{{ .Name }}</a>
                         </li>
                     {{- end }}
                 {{- end }}

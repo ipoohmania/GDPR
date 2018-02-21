@@ -29,6 +29,10 @@ $.grayLightest =  '#f8f9fa';
 
 $(document).ready(function($){
 
+  // Add table class to markdown tables
+  $('.main table').addClass('table table-bordered').css({backgroundColor: 'white'})
+  $('.main table td').css( { padding: '5px' })
+
   // Add class .active to current link
   $.navigation.find('a').each(function(){
 

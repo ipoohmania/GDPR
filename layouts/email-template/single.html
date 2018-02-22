@@ -1,0 +1,32 @@
+{{ define "content" }}
+
+<table class="table table-striped">
+    <tr>
+        <th>title:  		        </th>
+        <td>{{.Params.title}}     	</td>
+        <th>description:            </th>
+        <td>{{.Params.description}} </td>
+    </tr>
+</table>
+
+<h3>Notes</h3>
+<table class="table table-responsive-sm table-striped">
+    {{ range $value := .Params.notes }}
+    <tr>
+        <td> {{$value}} </td>
+    </tr>
+    {{ end }}
+</table>
+
+<h3>Email template</h3>
+
+<div class="card">
+    <div class="card-header">
+        {{.Params.subject}}
+    </div>
+    <div class="card-body">
+        {{ .Content}}
+    </div>
+</div>
+
+{{ end }}

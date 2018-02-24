@@ -34,9 +34,12 @@
 
 {{/* todo: add ability to sort by field (or at least by title)            */}}
 
+<style>
+
+</style>
 <div class="card">
     <div class="card-body">
-        <table class="table table-responsive" style="background:white;">
+        <table class="table table-responsive">
             <thead>
                 {{ range $fields}}
                     <th>{{ . }}</th>
@@ -81,7 +84,11 @@
                                             </table>
                                         </td>
                                     {{ else }}
-                                        <td>{{ $text }}</td>
+                                        {{ if hasPrefix $text "http"}}
+                                            <td><a href="{{ $text }}" target="_blank">open</a></td>
+                                        {{ else }}
+                                            <td>{{ $text }}</td>
+                                        {{ end }}
                                     {{ end }}
                                 {{ end }}
                             {{ else }}

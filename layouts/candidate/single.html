@@ -21,7 +21,11 @@
             <tr>
                 <td>
                     {{ if isset .Params "cv" }}
-                    <a href="../{{index .Params "cv"}}" target="_blank">cv</a>
+                        {{ if hasPrefix .Params.cv "http"}}
+                    <a href="{{index .Params "cv"}}" target="_blank">cv</a>
+                        {{ else }}
+                            <a href="../{{index .Params "cv"}}" target="_blank">cv</a>
+                        {{ end }}
                     {{ end }}
                 </td>
                 <td>

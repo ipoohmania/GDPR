@@ -1,9 +1,10 @@
 
 
-<div class="card card-accent-success">
+<div class="card card-accent-warning">
     {{ if .Params }}
         {{ if .Params.title  }}
-            <div class="card-header">
+
+            <div class="card-header ">
                 {{ .Params.title }}
                 <div class="card-actions">
                     <a href="#" class="btn-minimize" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true"><i class="icon-arrow-up"></i></a>
@@ -11,7 +12,7 @@
                 </div>
             </div>
         {{ end }}
-    {{ end}}
+    {{ end }}
     <div class="card-body collapse show" id="collapseExample">
         {{ markdownify .Inner }}
     </div>

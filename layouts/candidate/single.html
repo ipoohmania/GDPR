@@ -74,6 +74,8 @@
                 <td>{{.Params.keywords}} 	</td>
                 <th>email  		            </th>
                 <td>{{.Params.email}}       </td>
+                <th>github_id: 		        </th>
+                <td>{{.Params.github_id}}   </td>
             </tr>
             <tr>
                 <th>cv review:  	        </th>
@@ -86,6 +88,13 @@
                     {{ end }}
                 </td>
             </tr>
+            <tr>
+                <th>candidate site:  	       </th>
+                <td><a href="{{.Params.candidate_site }}" target="_blank">open</a></td>
+                <th>candidate pwd:  	       </th>
+                <td>{{.Params.candidate_pwd }}</a></td>
+                <th>candidate repo:  	</th>
+                <td><a href="{{.Params.candidate_repo }}" target="_blank">open</a></td>
 
         </table>
 

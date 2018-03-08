@@ -1,0 +1,12 @@
+{{ define "content" }}
+
+{{ .Content }}
+    {{ range  .Site.Pages}}
+        {{ if ne .Params.print_all false }}
+            <hr/>
+
+            <h2>{{ .Params.title}}</h2>
+            {{ .Content}}
+        {{ end }}
+    {{ end }}
+{{ end }}

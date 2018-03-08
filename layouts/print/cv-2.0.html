@@ -1,0 +1,74 @@
+{{ define "content" }}
+
+
+{{ .Content }}
+
+{{ with  .Site.GetPage "page" "role/okr.md"}}
+    <h1>OKRs</h1>
+    {{ .Content}}
+{{ end }}
+
+{{ with  .Site.GetPage "page" "role/okr.md"}}
+<h1>Role 2.0</h1>
+{{ .Content}}
+{{ end }}
+
+<h1>Qualities</h1>
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.top_left }}
+                <div class="alert alert-warning">
+                    <h2>{{ .Params.title}}</h2>
+                    {{ .Content }}
+                </div>
+            {{ end }}
+        </div>
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.top_right }}
+                <div class="alert alert-warning">
+                    <h2>{{ .Params.title}}</h2>
+                    {{ .Content }}
+                </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.middle_left }}
+            <div class="alert alert-warning">
+                <h2>{{ .Params.title}}</h2>
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </div>
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.middle_right }}
+            <div class="alert alert-warning">
+                <h2>{{ .Params.title}}</h2>
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.bottom_left }}
+            <div class="alert alert-warning">
+                <h2>{{ .Params.title}}</h2>
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </div>
+        <div class="col-sm-6">
+            {{with  .Site.GetPage "page"  .Params.cards.bottom_right }}
+            <div class="alert alert-warning">
+                <h2>{{ .Params.title}}</h2>
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

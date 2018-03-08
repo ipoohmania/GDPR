@@ -1,0 +1,8 @@
+{{with .this.Site.GetPage "page" .page }}
+
+    {{ $content := .RawContent }}
+    {{ $content := replace $content "xxx" $.this.Params.title}}
+    {{ $subject := .Params.title}}
+    {{ $email   := $.this.Params.email}}
+    <a href="mailto:{{$email}}?subject={{ $subject }}&body={{ $content }}" target="_blank">{{ $subject }}</a>
+{{ end }}

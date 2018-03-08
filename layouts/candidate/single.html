@@ -1,6 +1,8 @@
 {{ define "content" }}
 
 	{{/* partial "widgets/breadcrumb.html" . */}}
+
+
 	<main class="candidate">
 		<h1>
             {{ if isset .Params "image"}}
@@ -97,7 +99,19 @@
                 <td><a href="{{.Params.candidate_repo }}" target="_blank">open</a></td>
 
         </table>
+        <h3>Utils (Email templates)</h3>
+        <ul>
+            <li><b>Level 2</b></li>
+            <ul>
+                <li>{{ partial "widgets/gmail-link.html" (dict "this" . "page" "email-templates/level-2/introduction.md")}}</li>
+                <li>{{ partial "widgets/gmail-link.html" (dict "this" . "page" "email-templates/level-2/slack-invite.md")}}</li>
+                {{ $plan := (printf "email-templates/level-2/plan-%s.md" .Params.applied_to) }}
+                <li>
+                    {{ partial "widgets/gmail-link.html" (dict "this" . "page" $plan)}}
+                </li>
+            </ul>
 
+        </ul>
         <hr/>
         <h3>Activity</h3>
         {{ $text := .Params.activity }}

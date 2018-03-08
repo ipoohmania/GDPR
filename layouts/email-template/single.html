@@ -9,6 +9,9 @@
     {{.Params.description}}
 </ul>
 
+
+
+
 <h3>Notes</h3>
 <ul>
     <table class="table table-responsive-sm table-striped">
@@ -32,6 +35,18 @@
         </div>
     </div>
 </ul>
+
+<h3>Gmail link</h3>
+
+<p>
+    {{ $subject := .Params.subject }}
+    {{ $body    := .RawContent }}
+     <a href="mailto:?&subject={{$subject}}&body={{$body}}" target="_blank"/>Click here to open the email in GMail</a>
+</p>
+
+<p>
+    note: to make this work smoothly setup GMail as your default email clien (<a href="https://blog.hubspot.com/marketing/set-gmail-as-browser-default-email-client-ht">instructions here</a>)
+</p>
 
 <a href=".." >back to all email templates</a>
 {{ end }}

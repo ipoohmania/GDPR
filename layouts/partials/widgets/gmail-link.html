@@ -1,9 +1,11 @@
 {{with .this.Site.GetPage "page" .page }}
 
     {{ $content := .RawContent }}
-    {{ $content := replace $content "xxx" $.this.Params.title}}
+    {{ $content := replace $content "CANDIDATE_NAME" $.this.Params.title}}
+    {{ $content := replace $content "CANDIDATE_ID" $.this.Params.id}}
     {{ $subject := .Params.subject}}
     {{ $title   := .Params.title }}
+    {{ $cc      := .Params.cc }}
     {{ $email   := $.this.Params.email}}
-    <a href="mailto:{{$email}}?subject={{ $subject }}&body={{ $content }}" target="_blank">{{ $title }}</a>
+    <a href="mailto:{{$email}}?cc={{$cc}}&subject={{ $subject }}&body={{ $content }}" target="_blank">{{ $title }}</a>
 {{ end }}

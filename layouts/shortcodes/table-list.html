@@ -87,7 +87,11 @@
                                         {{ if hasPrefix $text "http"}}
                                             <td><a href="{{ $text }}" target="_blank">open</a></td>
                                         {{ else }}
-                                            <td>{{ $text }}</td>
+                                            {{ if eq $text true}}
+                                                <td><i class="fa fa-check-square fa-lg text-success"></i></td>
+                                            {{ else }}
+                                                <td>{{ $text }}</td>
+                                            {{ end }}
                                         {{ end }}
                                     {{ end }}
                                 {{ end }}

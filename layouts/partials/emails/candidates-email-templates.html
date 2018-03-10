@@ -1,0 +1,43 @@
+<h3>Email templates</h3>
+
+<div class="row">
+    <div class="col">
+
+        <div class="card card-accent-info">
+            <div class="card-header ">
+                <b>level 2</b>: When shorlisted
+                <div class="card-actions">
+                    <a href="#" class="btn-minimize" data-toggle="collapse" data-target="#level_2_body" aria-expanded="true"><i class="icon-arrow-up"></i></a>
+                </div>
+            </div>
+
+            <div class="card-body collapse hide" id="level_2_body">
+                <ul>
+                    <li>{{ partial "widgets/gmail-link.html" (dict "this" . "page" "email-templates/level-2/introduction.md")}}</li>
+                    <li>{{ partial "widgets/gmail-link.html" (dict "this" . "page" "email-templates/level-2/slack-invite.md")}}</li>
+                    <li>
+                        {{ $plan := (printf "email-templates/level-2/plan-%s.md" .Params.applied_to) }}
+                        {{ partial "widgets/gmail-link.html" (dict "this" . "page" $plan)}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card card-accent-info">
+            <div class="card-header ">
+                <b>to un-successful</b> When not shortlisted
+                <div class="card-actions">
+                    <a href="#" class="btn-minimize" data-toggle="collapse" data-target="#to_unsuccessful_body" aria-expanded="true"><i class="icon-arrow-up"></i></a>
+                </div>
+            </div>
+
+            <div class="card-body collapse hide" id="to_unsuccessful_body">
+                <p>Email to send to unsuccessful applicants after interaction with team</p>
+                <ul>
+                    <li>{{ partial "widgets/gmail-link.html" (dict "this" . "page" "email-templates/level-1/unsuccesful-post-answers.md")}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
